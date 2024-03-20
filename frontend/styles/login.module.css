@@ -1,0 +1,41 @@
+/* login.module.css */
+
+.form_container {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* background-color: palevioletred; */
+    overflow: hidden;
+}
+
+.form_container label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form_container input[type="text"],
+.form_container input[type="password"] {
+    width: calc(100% - 22px); /* Adjusting for border and padding */
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+.form_container button {
+    width: 30%;
+    min-width: 90px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form_container button:hover {
+    background-color: #0056b3;
+}

@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { Routes, Route } from 'react-router-dom'; // Updated import
+import { Link } from "react-router-dom";
 import styles from "../../styles/register.style.module.css";
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -59,11 +61,15 @@ const RegisterPage = () => {
     }
   };
   return (
+
+
     <div className={styles["main-register-div"]}>
+
 
 {registrationStatus ? (
       <div className={styles["success-message"]}>
-      <h3>Registeration Successfull Now you can Log in </h3>
+      <h3>Registeration Successfull Now you can Log in
+      <Link to="/login">Login</Link> </h3>
     </div>
 ):(
 <form onSubmit={handleSubmit}>
@@ -73,6 +79,7 @@ const RegisterPage = () => {
        type="text"
        name="username"
        id="username"
+       autoComplete="off"
        required
        value={username}
        onChange={(e) => setUsername(e.target.value)}
@@ -125,6 +132,7 @@ const RegisterPage = () => {
        type="password"
        name="password"
        id="password"
+       autoComplete="password"
        required
        value={password}
        onChange={(e) => setPassword(e.target.value)}
@@ -134,7 +142,7 @@ const RegisterPage = () => {
      <button type="submit">Register</button>
      <br></br>
      <br></br>
-     <h4 >already have an account? <button>log in</button></h4>
+     <p >already have an account?   <Link to="/login">log in</Link></p>
    </div>
  </form>
 

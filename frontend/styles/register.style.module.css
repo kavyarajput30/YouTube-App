@@ -1,75 +1,54 @@
-/* .main-register-div{
-    margin: auto;
-    width:60%;
-    background-color: palevioletred;
-    border:1px solid rgb(68, 68, 68);
-    border-radius: 15px;
+/* styles/register.style.module.css */
+.main-register-div {
+  max-width: 500px; /* Limit width for readability */
+  margin: 40px auto; /* Center the form */
+  padding: 30px;
+  background-color: #f8f9fa; /* Light, neutral background */
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-.main-register-div form{
-   width: max-content;
-    margin: auto;
-   display: flex;
-   flex-direction: column;
-   background-color: darkorange;
-   align-items: flex-start;
-   justify-content: center;
-   gap: 20PX;
-   font-size: 20px;
+.input-div {
+  margin-bottom: 20px;
+}
 
-} 
-.input-div{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-} */
-/* register.style.module.css */
+.input-div label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500; /* Slightly bolder labels */
+}
 
-.main-register-div {
-    max-width: 50%;
-    margin: 0 auto;
-    padding: 20px;
-    /* background-color: darkcyan; */
-  }
-  
-  .input-div {
-    margin-bottom: 20px;
-  }
-  
-  .input-div label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .input-div input[type="text"],
-  .input-div input[type="email"],
-  .input-div input[type="password"],
-  .input-div input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .input-div button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .input-div button[type="submit"]:hover {
-    background-color: #0056b3;
-  }
-  
-  .success-message {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
-  }
-  
+.input-div input[type="text"],
+.input-div input[type="email"],
+.input-div input[type="password"],
+.input-div input[type="file"] {
+  width: 100%; 
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Prevent padding from expanding the width */
+}
+
+.input-div button[type="submit"] {
+  width: 100%; /* Make button full width */
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.input-div button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724; /* Dark green for success */
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+}

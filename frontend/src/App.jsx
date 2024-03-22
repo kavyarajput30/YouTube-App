@@ -8,7 +8,7 @@ function App() {
   const location = useLocation(); // Get the current location
 
   return (
-    <div className="main-div">
+    <div className="main_div">
       <Routes> 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />

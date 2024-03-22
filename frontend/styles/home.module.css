@@ -1,0 +1,21 @@
+.main_div{
+    margin: auto;
+  width: 100%;
+  /* background-color: hotpink; */
+  /* margin-top: 60px; */
+}
+.card_div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 60px;
+    gap:40px;
+    padding: 10px;
+    align-items: center;
+}
+
+@media screen and (max-width: 826px) {
+    .card_div  {
+      justify-content: center;/* Center the single item horizontally */
+    }
+  }

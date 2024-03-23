@@ -7,6 +7,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [registrationStatus, setRegistrationStatus] = useState(false); // For feedback
+  const [userData, setUserData] = useState(null); 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page reload
     setRegistrationStatus(false);
@@ -25,9 +26,13 @@ const LoginPage = () => {
         }
       );
       if(response.data.success){
+      // console.log(response.data);
+      // console.log(response.data.data.user);
+      setUserData(response.data.data.user); // Store user data in state    
       setRegistrationStatus(true); // Update status
       setUsername("");
       setPassword("");
+      
       }
 
     } catch (error) {
@@ -38,7 +43,7 @@ const LoginPage = () => {
 
     return(
         <div className={styles.form_container}>
-             {registrationStatus && <Navigate to="/home" />}
+             {registrationStatus && <Navigate to="/home" state={{ userData }}/>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="username">Username</label>

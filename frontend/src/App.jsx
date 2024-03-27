@@ -13,7 +13,6 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<HomePage />} />
-        {/* Add more routes as needed */}
       </Routes>
 
       {/* Conditional rendering of navigation links */}

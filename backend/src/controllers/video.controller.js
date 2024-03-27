@@ -54,7 +54,7 @@ const getAllVideos = asyncHandler(async (req, res) => {
     // Return a 404 error response if no videos were found
     throw new ApiError(404, "No videos found");
   }
-  return res.status(200).json(new ApiResponce(200, "All Videos", allVideos));
+  return res.status(200).json(new ApiResponce(200, "All Related Videos Fetched Successfully", allVideos));
 });
 
 const publishAVideo = asyncHandler(async (req, res) => {

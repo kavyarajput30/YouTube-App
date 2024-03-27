@@ -26,8 +26,6 @@ const LoginPage = () => {
         }
       );
       if(response.data.success){
-      // console.log(response.data);
-      // console.log(response.data.data.user);
       setUserData(response.data.data.user); // Store user data in state    
       setRegistrationStatus(true); // Update status
       setUsername("");

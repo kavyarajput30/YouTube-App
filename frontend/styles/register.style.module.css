@@ -1,11 +1,12 @@
 /* styles/register.style.module.css */
 .main-register-div {
   max-width: 500px; /* Limit width for readability */
-  margin: 40px auto; /* Center the form */
+  margin: 20px auto; /* Center the form */
   padding: 30px;
   background-color: #f8f9fa; /* Light, neutral background */
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  scrollbar-width: 0;
 }
 
 .input-div {
@@ -24,6 +25,7 @@
 .input-div input[type="file"] {
   width: 100%; 
   padding: 12px;
+  outline: none;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box; /* Prevent padding from expanding the width */

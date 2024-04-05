@@ -3,12 +3,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:5173', // Replace with the origin of your frontend application
+  credentials: true
+}));
 
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN,
-  })
-);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.static("public"));
@@ -25,7 +24,7 @@ import commentRouter from "./routes/comment.routes.js"
 import likeRouter from "./routes/like.routes.js"
 import playlistRouter from "./routes/playlist.routes.js"
 import dashboardRouter from "./routes/dashboard.routes.js"
-
+import homeRouter from "./routes/home.routes.js"
 // routes declaration
 
 // app.use("/api/v1/healthcheck", healthcheckRouter)
@@ -37,6 +36,7 @@ app.use("/api/v1/comments", commentRouter)
 app.use("/api/v1/likes", likeRouter)
 app.use("/api/v1/playlist", playlistRouter)
 app.use("/api/v1/dashboard", dashboardRouter)
+app.use("/api/v1/home", homeRouter)
 
 
 export default app;

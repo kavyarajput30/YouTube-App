@@ -13,7 +13,9 @@
     padding: 10px;
     align-items: center;
 }
-
+.card_div a{
+    text-decoration:none;
+}
 @media screen and (max-width: 826px) {
     .card_div  {
       justify-content: center;/* Center the single item horizontally */

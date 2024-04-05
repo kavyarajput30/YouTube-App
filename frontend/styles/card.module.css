@@ -8,16 +8,23 @@
     max-width: 300px;
     border-radius: 6px;
     border: 2px solid gray;
-   
+    text-decoration: none;
+    color:black;
 }
 .main_div:hover{
     box-shadow: 0 0 8px gray;
 }
 .video_div{
+    height:200px;
     width:100%;
+    overflow: hidden;
+
+    
 }
 .video_div img{
     border-radius: 6px 6px 0px 0px;
+    width: 100%;
+    container: fit-content;
 }
 .video_div video{
     border-radius: 6px 6px 0px 0px;
@@ -31,4 +38,7 @@
     margin-top: 5px;
     margin-bottom: 8px;
     font-size: 22px;
+    font-weight: 500;
+    color: black;
+    
 }

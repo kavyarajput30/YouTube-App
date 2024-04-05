@@ -7,21 +7,30 @@ import { Comment } from "../models/comment.model.js";
 import { Tweet } from "../models/tweet.model.js";
 import mongoose from "mongoose";
 const toggleVideoLike = asyncHandler(async (req, res) => {
-    const {videoId} = req.params
-    const userId = req.user._id
+  const { videoId } = req.params;
+  const userId = req.user._id;
 
-    const existedvideo = await Video.findById(videoId);
-    if(!existedvideo){
-        throw new ApiError(404, "Video not found")
-    }
+  // Check if the video exists
+  const existingVideo = await Video.findById(videoId);
+  if (!existingVideo) {
+      throw new ApiError(404, "Video not found");
+  }
 
-   const Liked = await Like.create({video: videoId, likedBy: userId});
+  // Check if the user has already liked the video
+  const existingLike = await Like.findOne({ video: videoId, likedBy: userId });
+  if (existingLike) {
+      await Like.findByIdAndDelete(existingLike._id);
+      return res.status(200).json(new ApiResponce(200, "Video Unliked Successfully"));
+  }
+  // Create a new like entry
+  const newLike = await Like.create({ video: videoId, likedBy: userId });
+  if (!newLike) {
+      throw new ApiError(400, "Failed to like video");
+  }
 
-   if(!Liked){
-       throw new ApiError(400, "Failed to like video")
-   }
-return res.status(200).json(new ApiResponce(200, "Video Liked Successfully"))
-})
+  return res.status(200).json(new ApiResponce(200, "Video Liked Successfully"));
+});
+
 
 const toggleCommentLike = asyncHandler(async (req, res) => {
     const { commentId } = req.params
@@ -31,6 +40,12 @@ const toggleCommentLike = asyncHandler(async (req, res) => {
     if(!existedComment){
         throw new ApiError(404, "Comment not found")
     }
+    const existedCommentLike = await Like.findOne({comment: commentId, likedBy: userId});
+    if(existedCommentLike){
+        await Like.findByIdAndDelete(existedCommentLike._id);
+        return res.status(200).json(new ApiResponce(200, "Comment Unliked Successfully"))
+    }
+
     const Liked = await Like.create({comment: commentId, likedBy: userId});
  
     if(!Liked){
@@ -57,6 +72,11 @@ const toggleTweetLike = asyncHandler(async (req, res) => {
  return res.status(200).json(new ApiResponce(200, "Tweet Liked Successfully"));
 }
 )
+
+
+
+
+
 
 const getLikedVideos = asyncHandler(async (req, res) => {
     //TODO: get all the videos liked by a single user
@@ -110,6 +130,12 @@ const getLikedVideos = asyncHandler(async (req, res) => {
      return res.status(200).json(new ApiResponce(200, "Fetched all Liked Videos", likedVideos));
 
 })
+
+
+
+
+
+
 
 export {
     toggleCommentLike,

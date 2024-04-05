@@ -1,28 +1,16 @@
-import "./App.css";
-import { Routes, Route, useLocation } from 'react-router-dom'; 
-import { Link } from "react-router-dom";
-import LoginPage from "./components/Login.jsx";
-import RegisterPage from "./components/Register.jsx";
-import HomePage from "./components/Home.jsx";
+
+import React from 'react';
+import './App.css';
+import Header from './components/Header';
+import { Outlet } from 'react-router-dom';
+
 function App() {
-  const location = useLocation(); // Get the current location
-
   return (
-    <div className="main_div">
-      <Routes> 
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/home" element={<HomePage />} />
-      </Routes>
-
-      {/* Conditional rendering of navigation links */}
-      {location.pathname === '/'  && ( 
-        <div>
-          <Link to="/login">Login</Link>
-          <br></br>
-          <Link to="/register">Register</Link> 
-        </div>
-      )}
+    <div className="App"> {/* Root container for styling */}
+      <Header />
+      <main className="content-area"> {/* Main content container */}
+        <Outlet />
+      </main>
     </div>
   );
 }

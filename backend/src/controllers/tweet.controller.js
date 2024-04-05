@@ -93,9 +93,27 @@ const deleteTweet = asyncHandler(async (req, res) => {
  return res.status(200).json(new ApiResponce(200, "Tweet Deleted Successfully", deletedTweet))
 })
 
+const getParticularTweet = asyncHandler(async (req, res) => {
+    //TODO: get particular tweet
+    const {tweetId} = req.params
+    if(!mongoose.isValidObjectId(tweetId)){
+        throw new ApiError(400, "Invalid Tweet Id")
+    }
+    const tweet = await Tweet.findById(tweetId);
+   if (!tweet) {
+    throw new ApiError(404, "tweet not found");
+}
+    if (!req.user._id.equals(tweet.owner)) {
+        throw new ApiError( 400, "You are not authorized to edit the tweet");
+      } 
+
+    return res.status(200).json(new ApiResponce(200, "Tweet Fetched Successfully", tweet))
+})
+
 export {
     createTweet,
     getUserTweets,
     updateTweet,
-    deleteTweet
+    deleteTweet,
+    getParticularTweet
 }

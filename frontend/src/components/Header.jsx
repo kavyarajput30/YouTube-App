@@ -2,47 +2,130 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 import { useState } from "react";
 import axios from "axios";
-const Header = ({ userData }) => {
-const [searchQuery, setSearchQuery] = useState("");
-const [allvideos, setAllVideos] = useState([]);
- async function searchQueryFunction(e){
-  e.preventDefault(); // Prevent page reload
-    try{
+const Header = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [allvideos, setAllVideos] = useState([]);
+  async function searchQueryFunction(e) {
+    e.preventDefault(); // Prevent page reload
+    try {
       const response = await axios.get(
         `http://localhost:8000/api/v1/videos?query=${searchQuery}`
       );
-      if(response){
-        let allvideos= response.data.data;
+      if (response) {
+        let allvideos = response.data.data;
         setAllVideos(allvideos);
         console.log(allvideos);
       }
-
-    }catch(err){
-      console.log('Error Fetching Data')
+    } catch (err) {
+      console.log("Error Fetching Data");
     }
- }
-  return (
-    <div className={styles.main_div}>
-      <div>
-        <h2>MeTube</h2>
-      </div>
+  }
+  async function handleLogout() {
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/users/logout",
+        {},
+        { withCredentials: true }
+      );
+      if (res.data.success) {
+        window.location.href = "/login";
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-      <div>
-        <form onSubmit={searchQueryFunction} >
-          <input type="search" value={searchQuery}  autoComplete="off" onChange={(e) => setSearchQuery(e.target.value)} name="query" id="query" placeholder="search query"  style={{fontSize:"17px", padding:"2px 10px", outline:'none', borderRadius:'15px', border:'1px solid black', marginRight:'5px'}}/>
-          <button type="submit" style={{ borderRadius:'13px', fontSize:"17px", padding:"5px 24px",border:'1px solid black', backgroundColor:'pink' }}>Search</button>
-        </form>
-      </div>
-      <div style={{ display: "flex", gap: "15px" }}>
-        <Link to="/profile">
-          {" "}
-          <div>Profile</div>{" "}
+  console.log("Header 1");
+  return (
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <Link className="navbar-brand" to="/">
+          MeTube
         </Link>
-        <div>Videos Info</div>
-        <div>{userData.fullname}</div>
-        <div>Logout</div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/tweet">
+                Tweet
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/playlist">
+                Playlist
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link " aria-current="page" to="/upload">
+                Upload
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile">
+                Profile
+              </Link>
+            </li>
+          </ul>
+          <form className="d-flex" role="search" onSubmit={searchQueryFunction}>
+            <input
+              className="form-control me-2 sm-2"
+              type="search"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              name="query"
+              id="query"
+              autoComplete="off"
+              aria-label="Search"
+            />
+            <button className="btn btn-outline-success btn-sm" type="submit">
+              Search
+            </button>
+          </form>
+
+          <ul className="navbar-nav ms-auto mr-auto mb-2 mb-lg-0">
+          <li className="nav-item">
+              <Link
+                className="nav-link"
+                aria-current="page"
+                to="/login"
+              >
+                Login
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                aria-current="page"
+                to="/register"
+              >
+                Register
+              </Link>
+            </li>
+            <li className="nav-item">
+              <button
+                type="button"
+                className="btn btn-outline-success"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            </li>
+
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 export default Header;

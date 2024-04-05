@@ -25,7 +25,7 @@ router.route('/').post(verifyJWT,  upload.fields([
     
 ]), publishAVideo).get(getAllVideos)
 
-router.route("/:videoId").get(verifyJWT,getVideoById).patch(verifyJWT,upload.single("thumbnail"), updateVideo).delete(verifyJWT,deleteVideo)
+router.route("/:videoId").get(verifyJWT,getVideoById).patch(verifyJWT,upload.single("thumbnail"), updateVideo).delete(verifyJWT,deleteVideo);
  
 
 // router.route("/toggle/publish/:videoId").patch(togglePublishStatus);

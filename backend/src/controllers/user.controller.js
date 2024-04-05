@@ -22,14 +22,6 @@ const generateAccessAndRefreshToken = async (userID) => {
 const registerUser = asyncHandler(async (req, res) => {
   // client side se data lekar anaa h
   const { username, email, password, fullname } = req.body;
-  // console.log(req.body);
-  // console.log(req.files);
-  //   console.log(username, email,  password);
-  // validation - not empty
-
-  // if(fullname === ''){
-  //    throw new ApiError(400,"Fullname cannot be empty")
-  // }
 
   if (
     [fullname, email, password, username].some((field) => {
@@ -155,6 +147,7 @@ const loginUser = asyncHandler(async (req, res) => {
 
   // send cookies
 });
+
 
 const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(req.user._id, {

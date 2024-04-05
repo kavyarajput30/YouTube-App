@@ -100,7 +100,10 @@ const publishAVideo = asyncHandler(async (req, res) => {
 
 const getVideoById = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
-  const video = await Video.findById(videoId);
+  const video = await Video.findById(videoId).populate("owner", "username fullname avatar");
+  if (!video) {
+    throw new ApiError(404, "Video not found");
+  }
   return res
     .status(200)
     .json(new ApiResponce(200, "Video Fetched SuccessFully", video));
@@ -146,16 +149,13 @@ const updateVideo = asyncHandler(async (req, res) => {
 
 const deleteVideo = asyncHandler(async (req, res) => {
   const { videoId } = req.params;
-
   const video = await Video.findById(videoId);
   if (!video) {
     throw new ApiError(404, "Video not found");
   }
-
-
   if (!req.user._id.equals(video.owner)) {
     throw new ApiError(400, "You are not authorized to delete this video");
-  }  
+  }
   
   const deletedVideo = await Video.findByIdAndDelete(videoId);
   if (!deletedVideo) {

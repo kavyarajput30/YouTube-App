@@ -2,6 +2,7 @@
   width:100vw;
   height: 100vh;
   /* background-color: fuchsia; */
+  overflow-x: hidden;
 }
 .main_div{
   margin:0 auto;
@@ -13,6 +14,9 @@ scrollbar-width: 0;
 }
 body{
   -webkit-text-size-adjust: 100%;
+  a:-webkit-any-link {
+    text-decoration: none;
+  }
 }
 
 

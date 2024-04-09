@@ -11,7 +11,8 @@ import mongoose from "mongoose";
 
 const getChannelStats = asyncHandler(async (req, res) => {
     // TODO: Get the channel stats like total video views, total subscribers, total videos, total likes etc.
-    const channelInfo = await User.findById(req.user._id).select("-password -refreshToken");
+    const {id} = req.params;
+    const channelInfo = await User.findById(id).select("-password -refreshToken");
 
     if(!channelInfo){
         throw new ApiError(404, "Channel not found")
@@ -20,7 +21,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
    const pipeline=[
     {
       '$match': {
-        'owner': new mongoose.Types.ObjectId(req.user._id)
+        'owner': new mongoose.Types.ObjectId(id)
       }
     }, {
       '$lookup': {
@@ -50,10 +51,12 @@ const getChannelStats = asyncHandler(async (req, res) => {
 
 
 const getChannelVideos = asyncHandler(async (req, res) => {
+    // TODO: Get all videos of the channel
+    const {id} = req.params;
     const pipeline = [
         {
           '$match': {
-            'owner': new mongoose.Types.ObjectId(req.user._id)
+            'owner': new mongoose.Types.ObjectId(id)
           }
         },
         {

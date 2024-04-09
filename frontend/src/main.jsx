@@ -13,6 +13,7 @@ import Tweet from "./components/Tweet.jsx";
 import Playlist from "./components/Playlist.jsx";
 import Profile from "./components/Profile.jsx";
 import TweetEditFrom from "./components/TweetEditForm.jsx"; 
+import Dashboard from "./components/Dashboard.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -26,9 +27,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/edit/:id" element={<Edit />} />
           <Route path="/tweet" element={<Tweet />} />
           <Route path="/tweet/edit/:id" element={<TweetEditFrom />} />
+          <Route path="/dashboard/:ownerId" element={<Dashboard/>} />
           <Route path="/playlist" element={<Playlist />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/:id" element={<Video/>} />
+        
         </Route>
       </Routes>
     </Router>

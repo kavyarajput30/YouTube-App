@@ -3,27 +3,20 @@ import Card from "./Card.jsx";
 import { Link} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useContext} from "react";
+import UserContext from "../context/UserContext.js";
+import VideoContext from "../context/HomeVideoContext.js";
 const HomePage = () => {
- const [allVideos, setAllVideos] = useState([]);
-  useEffect(() => {
-   async function getAllData() {
-    let result= await axios.get('http://localhost:8000/api/v1/home');
-    if(result.data){
-      // console.log(result.data.data);
-      setAllVideos(result.data.data);
-    }
-    }
-    getAllData();
-  },[]);
 
-  console.log("HOME 1")
+ const {user} = useContext(UserContext);
+ const {allVideos} = useContext(VideoContext);
+
   return (
     <div className={styles.main_div}>
       <div className={styles.card_div}>
       {allVideos.map((video) => (
         <Link to={`/${video._id}`} key={video._id} > <Card key={video._id} video={video} /> </Link>
       ))}
-
       </div>
     </div>
   );

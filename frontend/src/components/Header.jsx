@@ -2,9 +2,14 @@ import { Link } from "react-router-dom";
 import styles from "../../styles/header.module.css";
 import { useState } from "react";
 import axios from "axios";
+import { useContext} from "react";
+import UserContext from "../context/UserContext.js";
+import VideoContext from "../context/HomeVideoContext.js";
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [allvideos, setAllVideos] = useState([]);
+  const {user,setUserWithStorage} = useContext(UserContext);
+  const {setAllVideos} = useContext(VideoContext);
+
   async function searchQueryFunction(e) {
     e.preventDefault(); // Prevent page reload
     try {
@@ -14,7 +19,7 @@ const Header = () => {
       if (response) {
         let allvideos = response.data.data;
         setAllVideos(allvideos);
-        console.log(allvideos);
+        setSearchQuery("");
       }
     } catch (err) {
       console.log("Error Fetching Data");
@@ -28,6 +33,8 @@ const Header = () => {
         { withCredentials: true }
       );
       if (res.data.success) {
+        localStorage.removeItem('user');
+        setUserWithStorage(null);
         window.location.href = "/login";
       }
     } catch (e) {
@@ -35,7 +42,7 @@ const Header = () => {
     }
   }
 
-  console.log("Header 1");
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -94,35 +101,27 @@ const Header = () => {
           </form>
 
           <ul className="navbar-nav ms-auto mr-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-              <Link
-                className="nav-link"
-                aria-current="page"
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link"
-                aria-current="page"
-                to="/register"
-              >
-                Register
-              </Link>
-            </li>
-            <li className="nav-item">
-              <button
-                type="button"
-                className="btn btn-outline-success"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </li>
-
-          </ul>
+  {!user ? (
+    <>
+      <li className="nav-item">
+        <Link className="nav-link" aria-current="page" to="/login">
+          Login
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" aria-current="page" to="/register">
+          Register
+        </Link>
+      </li>
+    </>
+  ) : (
+    <li className="nav-item">
+      <button type="button" className="btn btn-outline-success" onClick={handleLogout}>
+        Logout
+      </button>
+    </li>
+  )}
+</ul>
         </div>
       </div>
     </nav>

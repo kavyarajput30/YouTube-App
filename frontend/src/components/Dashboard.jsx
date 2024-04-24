@@ -31,6 +31,9 @@ function Dashboard() {
       console.log(res.data.data);
     }
   };
+  const getAllTweets = async () =>{
+    
+  }
 
   useEffect(() => {
     getAllVideos();
@@ -50,6 +53,7 @@ function Dashboard() {
           </div>
         </div>
         <div className={styles.videos_div}>
+        <h1>ALl Videos</h1>
           {allvideos.map((video) => (
             <div key={video._id} className={styles.video_div_main}>
               <Link to={`/${video._id}`} key={video._id} className={styles.link}>
@@ -65,6 +69,15 @@ function Dashboard() {
             </div>
           ))}
         </div>
+        <div className={styles.tweets_div}>
+<h1>All Tweets</h1>
+
+        </div>
+        <div className={styles.playlists_div}>
+<h1>Users Playlist</h1>
+        </div>
+
+
       </div>
     </>
   );
